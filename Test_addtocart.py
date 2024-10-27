@@ -44,8 +44,8 @@ def test_addtoCart(driver):
         product_name_in_cart = columns[2].text
         product_qty_in_cart = columns[6].text
 
-        if product_name == product_name_in_cart and product_qty_in_cart == 4:
-            assert "http://localhost/eCommerceSite-PHP/cart.php" in driver.current_url
+        if product_name == product_name_in_cart:
+            assert product_qty_in_cart == 4
     
 
     
