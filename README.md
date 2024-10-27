@@ -2,9 +2,9 @@ Environment Setup:
 
     _ Programming Language: Python
     
-    _ IDE: Visual Studio Code (with the virtual environmet of python (env))
+    _ IDE: Visual Studio Code (with the virtual environmemt of python (env))
     
-    _ Selenium WebDriver
+    _ Install Selenium WebDriver in VS Code
     
     _ Browser: Chrome Browser with the Chrome Driver, and choosing chromedriver version which is suitable with your device in https://googlechromelabs.github.io/chrome-for-testing/
 
