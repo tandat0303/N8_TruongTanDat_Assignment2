@@ -11,6 +11,8 @@ Environment Setup:
 How to run code:
 
     _ Firstly, run VS Code
+
+    _ Installing and running Xampp, then starting "Apache" and "MySQL"
     
     _ Ensuring that you had installed the relating modules (e.g., pytest, webdriver, etc)
     
