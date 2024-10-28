@@ -1,5 +1,7 @@
+# Call all modules and functions in the "driver.py" file
 from driver import *
 
+# The "test_addtoCart" function performs automatic checking for adding items to the cart
 def test_addtoCart(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
@@ -35,16 +37,23 @@ def test_addtoCart(driver):
 
     table = driver.find_element(By.CLASS_NAME, "table")
 
+    # Go through all the rows in the cart table
     rows = table.find_elements(By.TAG_NAME, "tr")
 
+    # Go through each column in each row
     for row in rows:
         columns = row.find_elements(By.TAG_NAME, "td")
 
     if len(columns) > 1:
+        # Get product's name in cart
         product_name_in_cart = columns[2].text
+
+        # Get product's quantity in cart
         product_qty_in_cart = columns[6].text
 
+        # Check if the product in the cart is the same as the product name before adding to the cart
         if product_name == product_name_in_cart:
+            # Check if the quantity of the added product is the same as when entered
             assert product_qty_in_cart == 4
     
 
