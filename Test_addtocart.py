@@ -51,7 +51,7 @@ def test_addtoCart(driver):
         # Get product's quantity in cart
         product_qty_in_cart = columns[6].text
 
-        # Check if the product in the cart is the same as the product name before adding to the cart
+        # Check if the product name in the cart is the same as the product name before adding to the cart
         if product_name == product_name_in_cart:
             # Check if the quantity of the added product is the same as when entered
             assert product_qty_in_cart == 4
