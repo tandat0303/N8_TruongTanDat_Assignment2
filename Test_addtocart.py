@@ -51,10 +51,135 @@ def test_addtoCart(driver):
         # Get product's quantity in cart
         product_qty_in_cart = columns[6].text
 
-        # Check if the product name in the cart is the same as the product name before adding to the cart
         if product_name == product_name_in_cart:
-            # Check if the quantity of the added product is the same as when entered
             assert product_qty_in_cart == 4
+
+
+def test_remove_item(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "remove-sauce-labs-backpack").click()
+    time.sleep(2)
+
+    status = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").text
+    assert "Add to cart" in status
+
+def test_view_cart(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "shopping_cart_container").click()
+    time.sleep(5)
+
+    assert "cart.html" in driver.current_url
+
+def test_firstname_empty(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "shopping_cart_container").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "checkout").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "last-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "postal-code").send_keys(123)
+    time.sleep(2)
+
+    driver.find_element(By.ID, "continue").click()
+    time.sleep(2)
+
+    error_message = driver.find_element(By.XPATH, "//h3[@data-test='error']").text
+    assert "Error: First Name is required" in error_message
+
+def test_lastname_empty(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "shopping_cart_container").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "checkout").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "first-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "postal-code").send_keys(123)
+    time.sleep(2)
+
+    driver.find_element(By.ID, "continue").click()
+    time.sleep(2)
+
+    error_message = driver.find_element(By.XPATH, "//h3[@data-test='error']").text
+    assert "Error: Last Name is required" in error_message
+
+def test_postalcode_empty(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "shopping_cart_container").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "checkout").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "first-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "last-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "continue").click()
+    time.sleep(2)
+
+    error_message = driver.find_element(By.XPATH, "//h3[@data-test='error']").text
+    assert "Error: Postal Code is required" in error_message
+
+def test_checkout_process(driver):
+    driver.get("https://www.saucedemo.com/")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    driver.find_element(By.ID, "shopping_cart_container").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "checkout").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "first-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "last-name").send_keys("dat")
+    time.sleep(2)
+
+    driver.find_element(By.ID, "postal-code").send_keys(123)
+    
+    driver.find_element(By.ID, "continue").click()
+    time.sleep(2)
+
+    driver.find_element(By.ID, "finish").click()
+    time.sleep(2)
+    
+    assert "checkout-complete" in driver.current_url
     
 
     
