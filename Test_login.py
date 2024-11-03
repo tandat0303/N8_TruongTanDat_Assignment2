@@ -1,5 +1,7 @@
+# Call all modules and functions in the "driver.py" file
 from driver import *
 
+# Test the login functionality with valid email and password
 def test_valid_login(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
@@ -13,6 +15,8 @@ def test_valid_login(driver):
 
     assert "http://localhost/eCommerceSite-PHP/dashboard.php" in driver.current_url
 
+
+# Test the login functionality with invalid email
 def test_invalid_email(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
@@ -29,6 +33,7 @@ def test_invalid_email(driver):
     assert "Email Address does not match." in error
 
 
+# Test the login functionality with invalid password
 def test_invalid_password(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
@@ -45,6 +50,7 @@ def test_invalid_password(driver):
     assert "Passwords do not match." in error
 
 
+# Test the login functionality without filling the fields
 def test_empty_fields(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 

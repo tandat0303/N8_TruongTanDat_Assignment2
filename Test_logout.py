@@ -1,5 +1,7 @@
+# Call all modules and functions in the "driver.py" file
 from driver import *
 
+# Test the logout functionality after logging in
 def test_logout(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 

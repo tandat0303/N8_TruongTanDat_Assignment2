@@ -1,5 +1,7 @@
+# Call all modules and functions in the "driver.py" file
 from driver import *
 
+# 
 def test_checkout(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 

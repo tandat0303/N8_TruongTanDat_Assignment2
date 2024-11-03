@@ -1,5 +1,7 @@
+# Call all modules and functions in the "driver.py" file
 from driver import *
 
+# Test the navigation of the website
 def test_navigation(driver):
     driver.get("http://localhost/eCommerceSite-PHP/index.php")
     time.sleep(2)
@@ -24,7 +26,7 @@ def test_navigation(driver):
 
     assert "Fashionys.com - Contact" in driver.title
 
-
+    # Back to the previous page
     driver.back()
     time.sleep(2)
 
