@@ -16,6 +16,13 @@ How to run code:
     
     _ Ensuring that you had installed the relating modules (e.g., pytest, webdriver, etc)
     
-    _ Choose python file which you want to run
-    
-    _ Right click -> select "Run Tests"
+    _ About Execution:
+        + For Batch execution:
+            * Save all codes in a folder
+            * Right click -> Choose "Run Tests"
+        
+        + For Individual execution:
+            * Save all codes in a folder
+            * In each python file, first press the key combination "CTRL + S"
+            * A play symbol appear next to the name of each function
+            * Click that symbol of the function which you want to run test
