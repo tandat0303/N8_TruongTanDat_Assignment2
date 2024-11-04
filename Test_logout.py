@@ -8,7 +8,7 @@ def test_logout(driver):
     driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.11@gmail.com")
     time.sleep(2)
 
-    driver.find_element(By.NAME, "cust_password").send_keys(12345)
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
     time.sleep(2)
 
     driver.find_element(By.NAME, "form1").click()
