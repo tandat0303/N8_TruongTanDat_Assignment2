@@ -191,5 +191,10 @@ def test_special_character(driver):
 
     error = driver.find_element(By.CLASS_NAME, "error").text
 
-    assert "Fullname is not contain special character." in error
+    assert "Fullname is not contain special character(s)." in error
+
+
+# Test the retype password if it matches the password
+def test_retypePW_match(driver):
+    driver.get('http://localhost/eCommerceSite-PHP/login.php')
 

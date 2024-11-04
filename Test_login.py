@@ -20,6 +20,26 @@ def test_valid_login(driver):
 def test_invalid_email(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
+    email = driver.find_element(By.NAME, "cust_email")
+    email.send_keys("ls17189gmail.com")
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "form1").click()
+    time.sleep(2)
+
+    # Get the UI error message
+    error_message = email.get_attribute("validationMessage")
+
+    assert "include an '@' in the email address" in error_message
+
+
+# Test the login functionality with wrong email
+def test_wrong_email(driver):
+    driver.get('http://localhost/eCommerceSite-PHP/login.php')
+
     driver.find_element(By.NAME, "cust_email").send_keys("ls17189@gmail.com")
     time.sleep(2)
 
@@ -32,9 +52,8 @@ def test_invalid_email(driver):
 
     assert "Email Address does not match." in error
 
-
-# Test the login functionality with invalid password
-def test_invalid_password(driver):
+# Test the login functionality with wrong password
+def test_wrong_password(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
     driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.11@gmail.com")
