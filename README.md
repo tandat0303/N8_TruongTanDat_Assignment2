@@ -1,6 +1,6 @@
 Environment Setup:
 
-    _ Programming Language: Python
+    _ Programming Language: Python, HTML
     
     _ IDE: Visual Studio Code (with the virtual environmemt of python (env))
     
