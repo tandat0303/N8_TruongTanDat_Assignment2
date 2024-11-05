@@ -20,6 +20,13 @@ How to run code:
         + For Batch execution:
             * Save all codes in a folder
             * Right click -> Choose "Run Tests"
+
+            * If you want a detailed report:
+                + Run tests with HTML report generation
+                        pytest --html=report.html
+
+                + After the tests finish running, a report.html file will be generated.
+                + Open it in any web browser to see a detailed, color-coded report of your test results.
         
         + For Individual execution:
             * Save all codes in a folder

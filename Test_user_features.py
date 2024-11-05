@@ -151,7 +151,98 @@ def test_special_character(driver):
 def test_update_password(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
 
+    driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.11@gmail.com")
+    time.sleep(2)
 
-# Test the retype password if it matches the password
-def test_retypePW_match(driver):
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "form1").click()
+    time.sleep(2)
+
+    driver.find_element(By.XPATH, "//button[text()='Update Password']").click()
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_re_password").send_keys(123456)
+    time.sleep(2)
+
+    # Click "Update"
+    driver.find_element(By.NAME, "form1").click()
+
+    success = driver.find_element(By.CLASS_NAME, "success").text
+    assert "Password is updated" in success
+
+
+# Test the retype password if it matches the password in the reset password form
+def test_passwords_match(driver):
     driver.get('http://localhost/eCommerceSite-PHP/login.php')
+
+    driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.11@gmail.com")
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "form1").click()
+    time.sleep(2)
+
+    driver.find_element(By.XPATH, "//button[text()='Update Password']").click()
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_password").send_keys(123456)
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "cust_re_password").send_keys(1234)
+    time.sleep(2)
+
+    # Get values which were just entered
+    pw = driver.find_element(By.NAME, "cust_password").get_attribute("value")
+    retype_pw = driver.find_element(By.NAME, "cust_re_password").get_attribute("value")
+
+    # Click "Update"
+    driver.find_element(By.NAME, "form1").click()
+
+    if pw == retype_pw:
+        success = driver.find_element(By.CLASS_NAME, "success").text
+        assert "Password is updated" in success
+    else:
+        error = driver.find_element(By.CLASS_NAME, "error").text
+        assert "Passwords do not match." in error
+
+
+# Test the Contact functionality
+def test_contact_us(driver):
+    driver.get('http://localhost/eCommerceSite-PHP/index.php')
+
+    driver.find_element(By.LINK_TEXT, "Contact Us").click()
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "visitor_name").send_keys("Dat")
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "visitor_email").send_keys("ls17189a3.11@gmail.com")
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "visitor_phone").send_keys("0123456789")
+    time.sleep(2)
+
+    driver.find_element(By.NAME, "visitor_message").send_keys("Please send me all vouchers your shop has")
+    time.sleep(2)
+
+    # Click "Send Message"
+    driver.find_element(By.NAME, "form_contact").click()
+    time.sleep(2)
+
+    # If there was an alert after sending message, accept it
+    try:
+        alert = driver.switch_to.alert
+        alert_message = alert.text
+        alert.accept()  # Accept alert
+        time.sleep(2)
+    except UnexpectedAlertPresentException:
+        print("There is no alert to be handle")
+
+    assert "Thank you for sending email. We will contact you shortly." in alert_message
