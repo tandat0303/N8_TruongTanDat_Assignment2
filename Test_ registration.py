@@ -11,7 +11,7 @@ def test_registration(driver):
     driver.find_element(By.NAME, "cust_cname").send_keys("Sai Gon University")
     time.sleep(1.5)
 
-    driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.13@gmail.com")
+    driver.find_element(By.NAME, "cust_email").send_keys("ls17189a3.12@gmail.com")
     time.sleep(1.5)
 
     driver.find_element(By.NAME, "cust_phone").send_keys("0383161867")
