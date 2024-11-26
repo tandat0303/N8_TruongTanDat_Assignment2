@@ -30,6 +30,8 @@ def test_bankDeposit_payment(driver):
 
     driver.find_element(By.LINK_TEXT, "Amazfit GTS 3 Smart Watch for Android iPhone").click()
 
+    product_title = driver.find_element(By.CLASS_NAME, "p-title").text
+
     select_color = Select(driver.find_element(By.NAME, "color_id"))
 
     select_color.select_by_visible_text("Gray")
@@ -38,12 +40,37 @@ def test_bankDeposit_payment(driver):
     qty_input = driver.find_element(By.CSS_SELECTOR, "input.input-text.qty[name='p_qty']")
     qty_input.clear()
     qty_input.send_keys("4")
+    qty = qty_input.get_attribute("value")
     
     driver.find_element(By.NAME, "form_add_to_cart").click()
     time.sleep(2)
 
     driver.find_element(By.XPATH, "//a[contains(text(), 'Cart')]").click()
     time.sleep(2)
+
+    table = driver.find_element(By.CLASS_NAME, "table")
+
+    # Go through all the rows in the cart table
+    rows = table.find_elements(By.TAG_NAME, "tr")
+
+    # Go through each column in each row
+    for row in rows:
+        columns = row.find_elements(By.TAG_NAME, "td")
+
+    if len(columns) > 1:
+        # Get product's name in cart
+        product_name_in_cart = columns[2].text
+        price_in_cart = columns[5]
+        price = int(price_in_cart.text.strip('$'))
+        qty_in_cart = columns.find_element(By.NAME, "quantity[]").get_attribute("value")
+        total_price_in_cart = columns[7]
+        total_price = int(total_price_in_cart.text.strip('$'))
+        
+        calculated_total_price = price * int(qty_in_cart)
+
+        assert product_title == product_name_in_cart
+        assert qty == qty_in_cart
+        assert total_price == calculated_total_price
 
     # Click "Proceed to Checkout"
     driver.find_element(By.XPATH, "//a[@href='checkout.php']").click()
@@ -63,7 +90,7 @@ def test_bankDeposit_payment(driver):
     success_message = driver.find_element(By.CSS_SELECTOR, "h3").text
 
     assert "Congratulation! Payment is successful." in success_message
-
+    
 
 # Test the checkout process, using "Paypal" payment method
 def test_Paypal_payment(driver):
@@ -94,6 +121,8 @@ def test_Paypal_payment(driver):
 
     driver.find_element(By.LINK_TEXT, "Amazfit GTS 3 Smart Watch for Android iPhone").click()
 
+    product_title = driver.find_element(By.CLASS_NAME, "p-title").text
+
     select_color = Select(driver.find_element(By.NAME, "color_id"))
 
     select_color.select_by_visible_text("Gray")
@@ -102,12 +131,37 @@ def test_Paypal_payment(driver):
     qty_input = driver.find_element(By.CSS_SELECTOR, "input.input-text.qty[name='p_qty']")
     qty_input.clear()
     qty_input.send_keys("4")
+    qty = qty_input.get_attribute("value")
     
     driver.find_element(By.NAME, "form_add_to_cart").click()
     time.sleep(2)
 
     driver.find_element(By.XPATH, "//a[contains(text(), 'Cart')]").click()
     time.sleep(2)
+
+    table = driver.find_element(By.CLASS_NAME, "table")
+
+    # Go through all the rows in the cart table
+    rows = table.find_elements(By.TAG_NAME, "tr")
+
+    # Go through each column in each row
+    for row in rows:
+        columns = row.find_elements(By.TAG_NAME, "td")
+
+    if len(columns) > 1:
+        # Get product's name in cart
+        product_name_in_cart = columns[2].text
+        price_in_cart = columns[5]
+        price = int(price_in_cart.text.strip('$'))
+        qty_in_cart = columns.find_element(By.NAME, "quantity[]").get_attribute("value")
+        total_price_in_cart = columns[7]
+        total_price = int(total_price_in_cart.text.strip('$'))
+        
+        calculated_total_price = price * int(qty_in_cart)
+
+        assert product_title == product_name_in_cart
+        assert qty == qty_in_cart
+        assert total_price == calculated_total_price
 
     # Click "Proceed to Checkout"
     driver.find_element(By.XPATH, "//a[@href='checkout.php']").click()
